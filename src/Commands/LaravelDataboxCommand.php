@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Weble\LaravelDatabox\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelDataboxCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-databox';
 
     public $description = 'My command';
 
