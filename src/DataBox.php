@@ -2,12 +2,12 @@
 
 namespace Weble\LaravelDatabox;
 
-
 use Illuminate\Support\Arr;
 
 class DataBox
 {
     private array $sources = [];
+
     private array $stack = [];
 
     public function push(MetricDTO|array $metrics, ?string $sourceName = null): void

@@ -9,7 +9,7 @@ return [
     'sources' => [
         'default' => [
             'token' => env('DATABOX_TOKEN', ''),
-            'queue' => null // use default
-        ]
-    ]
+            'queue' => null, // use default
+        ],
+    ],
 ];

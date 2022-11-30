@@ -13,19 +13,19 @@ class DataBoxFake extends DataBox
     public function __construct()
     {
         Http::fake([
-            DataBoxApi::ENDPOINT . '*' => (function (Request $request) {
+            DataBoxApi::ENDPOINT.'*' => (function (Request $request) {
                 $this->metrics = array_merge($this->metrics, json_decode($request->body(), true)['data']);
 
                 return Http::response([
                     'success' => true,
-                    'data' => ['id' => uniqid()]
+                    'data' => ['id' => uniqid()],
                 ], 200);
-            })
+            }),
         ]);
     }
 
-    public function assertSentCount(int $count = 1) {
-
+    public function assertSentCount(int $count = 1)
+    {
         $realCount = count($this->metrics);
 
         PHPUnit::assertTrue(

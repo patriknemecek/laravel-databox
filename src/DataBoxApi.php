@@ -2,7 +2,6 @@
 
 namespace Weble\LaravelDatabox;
 
-use DateTimeInterface;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -27,7 +26,7 @@ class DataBoxApi
         $response = $this
             ->request()
             ->post('', [
-                'data' => [$this->prepareKPIData($metrics)]
+                'data' => [$this->prepareKPIData($metrics)],
             ]);
 
         $this->validateResponse($response);
@@ -40,7 +39,7 @@ class DataBoxApi
         $response = $this
             ->request()
             ->post('', [
-                'data' => array_map(fn(MetricDTO $metric) => $this->prepareKPIData($metric), $metrics)
+                'data' => array_map(fn (MetricDTO $metric) => $this->prepareKPIData($metric), $metrics),
             ]);
 
         $this->validateResponse($response);
@@ -61,7 +60,7 @@ class DataBoxApi
 
     public function getPush(array|string $sha): array
     {
-        if (!is_array($sha)) {
+        if (! is_array($sha)) {
             $sha = [$sha];
         }
 
@@ -71,7 +70,7 @@ class DataBoxApi
 
         $response = $this
             ->request()
-            ->get('/lastpushes?id=' . implode(',', $sha));
+            ->get('/lastpushes?id='.implode(',', $sha));
 
         $this->validateResponse($response);
 
@@ -121,11 +120,11 @@ class DataBoxApi
 
     private function validateResponse(Response $response): void
     {
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw InvalidRequestException::fromResponse($response);
         }
 
-        if (!$response->json('success')) {
+        if (! $response->json('success')) {
             throw InvalidRequestException::fromResponse($response);
         }
     }

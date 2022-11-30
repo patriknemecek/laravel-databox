@@ -3,8 +3,6 @@
 namespace Weble\LaravelDatabox\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\Facades\Http;
-use Weble\LaravelDatabox\DataBoxApi;
 use Weble\LaravelDatabox\DataBoxFake;
 
 /**

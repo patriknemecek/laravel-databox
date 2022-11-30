@@ -22,6 +22,6 @@ class LaravelDataboxServiceProvider extends PackageServiceProvider
 
     public function packageBooted()
     {
-        $this->app->terminating(fn() => DataBoxFacade::sendAll());
+        $this->app->terminating(fn () => DataBoxFacade::sendAll());
     }
 }

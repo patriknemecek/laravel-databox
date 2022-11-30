@@ -8,6 +8,7 @@ use Weble\LaravelDatabox\Jobs\PushJob;
 class DataBoxSource
 {
     private array $config;
+
     private ?DataBoxApi $api = null;
 
     public function __construct(private string $name)
@@ -29,6 +30,7 @@ class DataBoxSource
     {
         if ($this->shouldQueue()) {
             PushJob::dispatch(metrics: $metrics, sourceName: $this->name);
+
             return;
         }
 
@@ -46,7 +48,7 @@ class DataBoxSource
 
     private function loadConfig(): void
     {
-        $sourceConfig = config('databox.sources.' . $this->name);
+        $sourceConfig = config('databox.sources.'.$this->name);
         if ($sourceConfig === null) {
             throw new UnknownSourceException("Source {$this->name} is not configured");
         }

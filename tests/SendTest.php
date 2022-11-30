@@ -6,7 +6,6 @@ use Weble\LaravelDatabox\Jobs\PushJob;
 use Weble\LaravelDatabox\MetricDTO;
 
 it('Sends Data After Request', function () {
-
     $fake = DataBox::fake();
 
     DataBox::source()->push(
@@ -26,12 +25,9 @@ it('Sends Data After Request', function () {
     app()->terminate();
 
     $fake->assertSentCount(2);
-
 });
 
-
 it('Sends Data After Request queueing', function () {
-
     $queue = Queue::fake();
     config()->set('databox.queue', true);
     $fake = DataBox::fake();
