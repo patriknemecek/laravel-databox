@@ -21,7 +21,7 @@ class DataBoxSource
         return $this->name;
     }
 
-    private function shouldQueue(): bool
+    public function shouldQueue(): bool
     {
         return $this->config['queue'] ?? config('databox.queue', false);
     }
