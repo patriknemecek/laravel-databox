@@ -5,7 +5,25 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/weble/laravel-databox/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/weble/laravel-databox/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/weble/laravel-databox.svg?style=flat-square)](https://packagist.org/packages/weble/laravel-databox)
 
-Send
+Databox integration for Laravel, with support for **sending metrics** and retrieving lists of availble metrics. 
+
+The data gets send in a **single push request after the Laravel application has finished sending the response** to avoid impacting the users. Pushing data can also be moved to the **queue** via a simple option in the config file
+
+## Example Usage
+
+```php
+use \LaravelDataBox\Facades\DataBox;
+
+// gets the default source
+$source = DataBox::source();
+
+// Push a new metric
+$source->push(new Metric(
+    key: 'sales', 
+    value: 888.22, 
+));
+```
+
 
 
 ## Installation
@@ -57,9 +75,68 @@ return [
 
 ## Usage
 
+You can interact with the DataBox APIs through the facade `LaravelDataBox\Facades\DataBox`
+
+### Push a single metric
+
 ```php
-Weble\LaravelDatabox();
-echo $laravelDatabox->echoPhrase('Hello, Weble!');
+use \LaravelDataBox\Facades\DataBox;
+
+// gets the default source
+$source = DataBox::source();
+
+// Push a new metric
+$source->push(new Metric(
+    key: 'sales', // Adds automatically the $ sign if not present
+    value: 888.22, // any float / int value
+));
+```
+
+### Push multiple metrics
+
+```php
+use \LaravelDataBox\Facades\DataBox;
+
+$source = DataBox::source();
+$source->push([
+    new Metric(
+        key: 'sales',
+        value: 888.22, 
+    ),
+    new Metric(
+        key: 'sales', 
+        value: 72,
+    ),
+]);
+```
+
+### Full list of metric options
+
+```php
+use \LaravelDataBox\Facades\DataBox;
+
+$source = DataBox::source();
+$source->push(new Metric(
+    key: 'sales',
+    value: 888.22, 
+    date: now()->subDay(), // date of the metric event
+    attributes: [ // Custom attributes for dimensions
+        'channel' => 'sales'
+    ],
+    'unit' => 'EUR', // Unit of the value
+));
+```
+
+### Use a different source
+
+```php
+use \LaravelDataBox\Facades\DataBox;
+
+$source = DataBox::source('other_source');
+$source->push(new Metric(
+    key: 'sales',
+    value: 888.22
+));
 ```
 
 ## Testing

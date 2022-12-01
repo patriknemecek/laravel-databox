@@ -28,7 +28,11 @@ class DataBoxSource
         return $this->config['queue'] ?? config('databox.queue', false);
     }
 
-    public function push(Metric $metrics): void
+    /**
+     * @param Metric|Metric[] $metrics
+     * @return void
+     */
+    public function push(Metric|array $metrics): void
     {
         if ($this->shouldQueue()) {
             PushJob::dispatch(metrics: $metrics, sourceName: $this->name);
