@@ -1,7 +1,7 @@
 <?php
 
-use Weble\LaravelDatabox\DataBoxSource;
-use Weble\LaravelDatabox\Facades\DataBox;
+use LaravelDataBox\DataBoxSource;
+use LaravelDataBox\Facades\DataBox;
 
 it('creates a default source', function () {
     $source = DataBox::source();

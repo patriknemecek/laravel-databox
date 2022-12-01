@@ -1,8 +1,9 @@
 <?php
 
-namespace Weble\LaravelDatabox;
+namespace LaravelDataBox;
 
 use Illuminate\Support\Arr;
+use LaravelDataBox\DTOs\Metric;
 
 class DataBox
 {
@@ -10,7 +11,7 @@ class DataBox
 
     private array $stack = [];
 
-    public function push(MetricDTO|array $metrics, ?string $sourceName = null): void
+    public function push(Metric|array $metrics, ?string $sourceName = null): void
     {
         $metrics = Arr::wrap($metrics);
 

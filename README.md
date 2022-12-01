@@ -1,11 +1,11 @@
-# Databox API integration for Laravel
+# Databox integration for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/weble/laravel-databox.svg?style=flat-square)](https://packagist.org/packages/weble/laravel-databox)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/weble/laravel-databox/run-tests?label=tests)](https://github.com/weble/laravel-databox/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/weble/laravel-databox/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/weble/laravel-databox/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/weble/laravel-databox.svg?style=flat-square)](https://packagist.org/packages/weble/laravel-databox)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Send
 
 
 ## Installation
@@ -22,17 +22,43 @@ You can publish the config file with:
 php artisan vendor:publish --tag="laravel-databox-config"
 ```
 
-This is the contents of the published config file:
+This is the contents of the published config file, with each option commented:
 
 ```php
+<?php
+
 return [
+
+    // name of the default source, used when not passing a specific source name
+    'default_source' => 'default',
+
+    // should the data be pushed with a queued job?
+    // default setting, can be overridden per source
+    'queue' => false,
+
+    // List of sources, you can create as many as you want, each with its
+    // own token and queue setting
+    'sources' => [
+
+        'default' => [
+
+            // The token generated in the databox UI
+            'token' => env('DATABOX_TOKEN', ''),
+
+            // Each source can override the queue setting.
+            // null means use the default setting above
+            'queue' => null,
+        ],
+        
+        // More sources....
+    ],
 ];
 ```
 
 ## Usage
 
 ```php
-$laravelDatabox = new Weble\LaravelDatabox();
+Weble\LaravelDatabox();
 echo $laravelDatabox->echoPhrase('Hello, Weble!');
 ```
 

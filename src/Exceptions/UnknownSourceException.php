@@ -1,6 +1,6 @@
 <?php
 
-namespace Weble\LaravelDatabox\Exceptions;
+namespace LaravelDataBox\Exceptions;
 
 use RuntimeException;
 

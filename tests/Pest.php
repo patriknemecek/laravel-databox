@@ -1,5 +1,5 @@
 <?php
 
-use Weble\LaravelDatabox\Tests\TestCase;
+use LaravelDataBox\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Weble\LaravelDatabox;
+namespace LaravelDataBox;
 
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;

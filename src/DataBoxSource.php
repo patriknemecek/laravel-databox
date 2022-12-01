@@ -1,9 +1,11 @@
 <?php
 
-namespace Weble\LaravelDatabox;
+namespace LaravelDataBox;
 
-use Weble\LaravelDatabox\Exceptions\UnknownSourceException;
-use Weble\LaravelDatabox\Jobs\PushJob;
+use LaravelDataBox\DTOs\Metric;
+use LaravelDataBox\DTOs\MetricKey;
+use LaravelDataBox\Exceptions\UnknownSourceException;
+use LaravelDataBox\Jobs\PushJob;
 
 class DataBoxSource
 {
@@ -26,7 +28,7 @@ class DataBoxSource
         return $this->config['queue'] ?? config('databox.queue', false);
     }
 
-    public function push(MetricDTO $metrics): void
+    public function push(Metric $metrics): void
     {
         if ($this->shouldQueue()) {
             PushJob::dispatch(metrics: $metrics, sourceName: $this->name);
@@ -35,6 +37,12 @@ class DataBoxSource
         }
 
         PushJob::dispatchAfterResponse(metrics: $metrics, sourceName: $this->name);
+    }
+
+    /** @return MetricKey[] */
+    public function metrics(): array
+    {
+        return $this->api->metrics();
     }
 
     public function api(): DataBoxApi

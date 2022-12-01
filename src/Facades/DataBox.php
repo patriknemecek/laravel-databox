@@ -1,13 +1,13 @@
 <?php
 
-namespace Weble\LaravelDatabox\Facades;
+namespace LaravelDataBox\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Weble\LaravelDatabox\DataBoxFake;
+use LaravelDataBox\DataBoxFake;
 
 /**
- * @see \Weble\LaravelDatabox\DataBox
- * @mixin \Weble\LaravelDatabox\DataBox
+ * @see \LaravelDataBox\DataBox
+ * @mixin \LaravelDataBox\DataBox
  */
 class DataBox extends Facade
 {
@@ -20,6 +20,6 @@ class DataBox extends Facade
 
     protected static function getFacadeAccessor()
     {
-        return \Weble\LaravelDatabox\DataBox::class;
+        return \LaravelDataBox\DataBox::class;
     }
 }

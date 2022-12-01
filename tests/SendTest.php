@@ -1,22 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Queue;
-use Weble\LaravelDatabox\Facades\DataBox;
-use Weble\LaravelDatabox\Jobs\PushJob;
-use Weble\LaravelDatabox\MetricDTO;
+use LaravelDataBox\DTOs\Metric;
+use LaravelDataBox\Facades\DataBox;
+use LaravelDataBox\Jobs\PushJob;
 
 it('Sends Data After Request', function () {
     $fake = DataBox::fake();
 
     DataBox::source()->push(
-        new MetricDTO(
+        new Metric(
             key: 'test',
             value: 1,
         )
     );
 
     DataBox::source()->push(
-        new MetricDTO(
+        new Metric(
             key: 'test',
             value: 2,
         )
@@ -33,14 +33,14 @@ it('Sends Data After Request queueing', function () {
     $fake = DataBox::fake();
 
     DataBox::source()->push(
-        new MetricDTO(
+        new Metric(
             key: 'test',
             value: 1,
         )
     );
 
     DataBox::source()->push(
-        new MetricDTO(
+        new Metric(
             key: 'test',
             value: 2,
         )

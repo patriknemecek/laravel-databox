@@ -1,12 +1,12 @@
 <?php
 
-namespace Weble\LaravelDatabox;
+namespace LaravelDataBox;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Weble\LaravelDatabox\Facades\DataBox as DataBoxFacade;
+use LaravelDataBox\Facades\DataBox as DataBoxFacade;
 
-class LaravelDataboxServiceProvider extends PackageServiceProvider
+class DataBoxServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {

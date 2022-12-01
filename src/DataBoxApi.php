@@ -1,11 +1,13 @@
 <?php
 
-namespace Weble\LaravelDatabox;
+namespace LaravelDataBox;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
-use Weble\LaravelDatabox\Exceptions\InvalidRequestException;
+use LaravelDataBox\DTOs\Metric;
+use LaravelDataBox\DTOs\MetricKey;
+use LaravelDataBox\Exceptions\InvalidRequestException;
 
 class DataBoxApi
 {
@@ -18,7 +20,7 @@ class DataBoxApi
         $this->token = $token;
     }
 
-    public function push(MetricDTO|array $metrics): ?string
+    public function push(Metric|array $metrics): ?string
     {
         if (is_array($metrics)) {
             return $this->pushList($metrics);
@@ -39,7 +41,7 @@ class DataBoxApi
         $response = $this
             ->request()
             ->post('', [
-                'data' => array_map(fn (MetricDTO $metric) => $this->prepareKPIData($metric), $metrics),
+                'data' => array_map(fn (Metric $metric) => $this->prepareKPIData($metric), $metrics),
             ]);
 
         $this->validateResponse($response);
@@ -47,36 +49,9 @@ class DataBoxApi
         return $response->json('data.id');
     }
 
-    public function lastPush(int $n = 1): array
-    {
-        $response = $this
-            ->request()
-            ->get(sprintf('/lastpushes?limit=%d', $n));
-
-        $this->validateResponse($response);
-
-        return $response->json('data', []);
-    }
-
-    public function getPush(array|string $sha): array
-    {
-        if (! is_array($sha)) {
-            $sha = [$sha];
-        }
-
-        if (empty($sha)) {
-            return [];
-        }
-
-        $response = $this
-            ->request()
-            ->get('/lastpushes?id='.implode(',', $sha));
-
-        $this->validateResponse($response);
-
-        return $response->json('data', []);
-    }
-
+    /**
+     * @return MetricKey[]
+     */
     public function metrics(): array
     {
         $response = $this
@@ -85,7 +60,15 @@ class DataBoxApi
 
         $this->validateResponse($response);
 
-        return $response->json('data', []);
+        $data = $response->json('metrics', []);
+
+        return array_map(function(array $metricKey) {
+            return new MetricKey(
+                key: $metricKey['key'] ?? '',
+                title: $metricKey['title'] ?? '',
+                isAttributed: $metricKey['isAttributed'] ?? false,
+            );
+        }, $data);
     }
 
     public function purge(): void
@@ -95,7 +78,7 @@ class DataBoxApi
         $this->validateResponse($response);
     }
 
-    private function prepareKPIData(MetricDTO $metric): array
+    private function prepareKPIData(Metric $metric): array
     {
         $data = [sprintf('$%s', trim($metric->key, '$')) => $metric->value];
 

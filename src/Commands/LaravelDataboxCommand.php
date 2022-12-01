@@ -1,10 +1,10 @@
 <?php
 
-namespace Weble\LaravelDatabox\Commands;
+namespace LaravelDataBox\Commands;
 
 use Illuminate\Console\Command;
 
-class LaravelDataboxCommand extends Command
+class LaravelDataBoxCommand extends Command
 {
     public $signature = 'laravel-databox';
 

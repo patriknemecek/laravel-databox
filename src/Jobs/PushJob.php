@@ -1,14 +1,14 @@
 <?php
 
-namespace Weble\LaravelDatabox\Jobs;
+namespace LaravelDataBox\Jobs;
 
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use Weble\LaravelDatabox\DataBox;
-use Weble\LaravelDatabox\MetricDTO;
+use LaravelDataBox\DataBox;
+use LaravelDataBox\DTOs\Metric;
 
 class PushJob implements ShouldQueue
 {
@@ -17,7 +17,7 @@ class PushJob implements ShouldQueue
     use InteractsWithQueue;
     use Queueable;
 
-    public function __construct(private MetricDTO|array $metrics, private ?string $sourceName = null)
+    public function __construct(private Metric|array $metrics, private ?string $sourceName = null)
     {
     }
 

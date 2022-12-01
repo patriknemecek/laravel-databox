@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Weble\\LaravelDatabox\\": "src",
-            "Weble\\LaravelDatabox\\Database\\Factories\\": "database/factories"
+            "LaravelDataBox\\": "src",
+            "LaravelDataBox\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Weble\\LaravelDatabox\\Tests\\": "tests"
+            "LaravelDataBox\\Tests\\": "tests"
         }
     },
     "scripts": {
