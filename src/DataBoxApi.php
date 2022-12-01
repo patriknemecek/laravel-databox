@@ -62,7 +62,7 @@ class DataBoxApi
 
         $data = $response->json('metrics', []);
 
-        return array_map(function(array $metricKey) {
+        return array_map(function (array $metricKey) {
             return new MetricKey(
                 key: $metricKey['key'] ?? '',
                 title: $metricKey['title'] ?? '',

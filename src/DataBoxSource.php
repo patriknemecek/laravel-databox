@@ -29,7 +29,7 @@ class DataBoxSource
     }
 
     /**
-     * @param Metric|Metric[] $metrics
+     * @param  Metric|Metric[]  $metrics
      * @return void
      */
     public function push(Metric|array $metrics): void

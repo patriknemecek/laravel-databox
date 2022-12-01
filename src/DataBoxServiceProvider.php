@@ -2,9 +2,9 @@
 
 namespace LaravelDataBox;
 
+use LaravelDataBox\Facades\DataBox as DataBoxFacade;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use LaravelDataBox\Facades\DataBox as DataBoxFacade;
 
 class DataBoxServiceProvider extends PackageServiceProvider
 {
